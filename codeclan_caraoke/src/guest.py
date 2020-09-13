@@ -6,5 +6,3 @@ class Guest:
         self.name = input_name
         self.wallet = input_wallet
         self.favourite_song = input_favourite_song
-
-    

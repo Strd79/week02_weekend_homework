@@ -8,15 +8,15 @@ class TestRoom(unittest.TestCase):
 # MVP
     
     def setUp(self):
-        self.room_1 = Room("The Popaoke room", 10)
-        self.room_2 = Room("The Countryaoke room", 6)
-        self.room_3 = Room("The Rockaoke room", 15)
-        self.room_4 = Room("The Rapaoke room", 2)
+        self.room_1 = Room("The Popaoke room", 10, 15)
+        self.room_2 = Room("The Countryaoke room", 6, 20)
+        self.room_3 = Room("The Rockaoke room", 15, 10)
+        self.room_4 = Room("The Rapaoke room", 2, 50)
 
         self.guest_1 = Guest("David", 150, "Jolene")
         self.guest_2 = Guest("Kyle", 100, "Lovers")
         self.guest_3 = Guest("Antonia", 200, "I should be so lucky")
-        self.guest_4 = Guest("Ewen", 50, "We will rock you")
+        self.guest_4 = Guest("Ewen", 300, "We will rock you")
 
         self.song_1 = Song("I should be so lucky", "Kylie Minogue")
         self.song_2 = Song("Jolene", "Dolly Parton")
@@ -75,4 +75,15 @@ class TestRoom(unittest.TestCase):
     def test_room_capacity_right_number_of_guests(self):
         self.room_4.check_in_guest_to_room(self.guest_1)
         self.room_4.check_in_guest_to_room(self.guest_2)
+        self.assertEqual(2, len(self.room_4.guests))
+
+    def test_room_capacity_lower_number_of_guests(self):
+        self.room_3.check_in_guest_to_room(self.guest_3)
+        self.room_3.check_in_guest_to_room(self.guest_4)
+        self.assertEqual(2, len(self.room_3.guests))
+
+    def test_room_capacity_too_many_guests(self):
+        self.room_4.check_in_guest_to_room(self.guest_1)
+        self.room_4.check_in_guest_to_room(self.guest_3)
+        self.room_4.check_in_guest_to_room(self.guest_4)
         self.assertEqual(2, len(self.room_4.guests))
